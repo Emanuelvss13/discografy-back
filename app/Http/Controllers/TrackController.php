@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Album;
 use App\Models\Track;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -17,6 +18,15 @@ class TrackController
         ]);
     }
     public function store(Request $request){
+        $album = Album::find($request->album_id);
+
+        if(!$album) {
+            return response()->json([
+                'status' => 404,
+                'message'=> 'Album não encontrado.',
+            ]);
+        }
+
         $track = Track::create([
             'name' => $request->name,
             'duration' => $request->duration,
