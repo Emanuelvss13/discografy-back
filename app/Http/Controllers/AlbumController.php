@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 
 class AlbumController
 {
+
+
     public function index(): JsonResponse {
         $albums = Album::with('tracks')->get();
 
@@ -28,8 +30,10 @@ class AlbumController
 
     public function store(Request $request): JsonResponse {
 
+        $TiaoAndPardinho = 1;
+
         $album = Album::create([
-            'artist_id' => 1,
+            'artist_id' => $TiaoAndPardinho,
             'name' => $request->name,
         ]);
 
